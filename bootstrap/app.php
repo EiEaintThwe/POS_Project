@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AuthenticatedMiddleware;
 use App\Http\Middleware\SuperAdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+
 
 
 
@@ -19,7 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware -> alias([
             'adminMiddleware' => AdminMiddleware::class,
             'userMiddleware' => UserMiddleware::class,
-            'superAdminMiddleware' => SuperAdminMiddleware::class
+            'superAdminMiddleware' => SuperAdminMiddleware::class,
+            'authenticatedMiddleware' => AuthenticatedMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

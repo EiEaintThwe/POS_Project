@@ -38,10 +38,6 @@
 
 <body>
 
-
-
-
-
     <!-- Navbar start -->
     <div class="container-fluid fixed-top">
 
@@ -71,14 +67,16 @@
                         </a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle my-auto mt-2" data-bs-toggle="dropdown">
-                                <img src=" " style="width: 50px" class="img-profile  rounded-circle" alt="">
+                                <img src="{{ asset(Auth::user()->profile == null ? 'default/profilePicture.jpg' : 'profile/' . Auth::user()->profile) }}"
+                                    style="width: 50px" class="img-profile  rounded-circle" alt="">
                                 <span></span>
                             </a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="#" class="dropdown-item my-2">Edit Profile</a>
-                                <a href="#" class="dropdown-item my-2">Change Password</a>
+                                <a href="{{ route('user#editProfile') }}" class="dropdown-item my-2">Edit Profile</a>
+                                <a href="{{ route('user#changePasswordPage') }}" class="dropdown-item my-2">Change Password</a>
                                 <a href="#" class="dropdown-item my-2">
-                                    <form action="" method="post">
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
 
                                         <input type="submit" value="Logout"
                                             class="btn btn-outline-success rounded w-100 mb-3">
@@ -96,6 +94,8 @@
 
 
     @yield('content')
+
+    @include('sweetalert::alert')
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
@@ -137,7 +137,8 @@
                         <h4 class="text-light mb-3">Why People Like us!</h4>
                         <p class="mb-4">typesetting, remaining essentially unchanged. It was
                             popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read
+                            More</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -182,7 +183,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site
+                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your
+                            Site
                             Name</a>, All right reserved.</span>
                 </div>
                 <div class="col-md-6 my-auto text-center text-md-end text-white">
@@ -215,5 +217,23 @@
     <script src="{{ asset('user/lib/lightbox/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
+    {{-- sweet alert cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <script>
+        function loadFile(event) {
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                var output = document.getElementById('output');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+</body>
 
 </html>

@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <table class="table table-hover shadow-sm ">
+                            <table class="table table-hover shadow-sm text-center ">
                                 <thead class="bg-primary text-white">
                                     <tr>
                                         <th>Profile</th>

@@ -10,7 +10,7 @@
                         <div class="card-header py-3">
                             <div class="">
                                 <div class="">
-                                    <h6 class="m-0 font-weight-bold text-primary">Profile ( <span
+                                    <h6 class="m-0 font-weight-bold text-primary">Admin Profile ( <span
                                             class="text-danger"> {{ Auth::user()->role }}</span> ) </h6>
                                 </div>
                             </div>

@@ -76,6 +76,10 @@
                                 </tbody>
                             </table>
 
+                             {{-- <span class=" d-flex justify-content-end">{{ $products->links() }}</span> --}}
+
+
+
                         </div>
                     </div>
                 </div>
