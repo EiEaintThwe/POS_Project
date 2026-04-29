@@ -44,7 +44,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <a href="index.html" class="navbar-brand">
-                    <h1 class="text-primary display-6">Fruitables</h1>
+                    <h1 class="text-primary display-6">Convenience Store</h1>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -69,7 +69,7 @@
                             <a href="#" class="nav-link dropdown-toggle my-auto mt-2" data-bs-toggle="dropdown">
                                 <img src="{{ asset(Auth::user()->profile == null ? 'default/profilePicture.jpg' : 'profile/' . Auth::user()->profile) }}"
                                     style="width: 50px" class="img-profile  rounded-circle" alt="">
-                                <span></span>
+                                <span>{{ Auth::user()->name == null ? Auth::user()->nickname : Auth::user()->name }}</span>
                             </a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                 <a href="{{ route('user#editProfile') }}" class="dropdown-item my-2">Edit Profile</a>
@@ -104,8 +104,8 @@
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <a href="#">
-                            <h1 class="text-primary mb-0">Fruitables</h1>
-                            <p class="text-secondary mb-0">Fresh products</p>
+                            <h1 class="text-primary mb-0">Convenience Store</h1>
+                            <p class="text-secondary mb-0">Products</p>
                         </a>
                     </div>
                     <div class="col-lg-6">
