@@ -8,16 +8,24 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group( [ 'prefix' => 'user', 'middleware' => 'userMiddleware' ] , function(){
-    Route::get('home',function(){
-        return view('user.home');
-    })->name('user#homepage');
 
     Route::get('home', [UserController::class, 'home'])->name('user#homepage');
+    Route::get('product/details/{id}',[UserController::class, 'productDetails'])->name('user#productDetails');
+
+    Route::post('comment',[UserController::class, 'comment'])->name('user#comment');
+    Route::get('comment/delete/{id}',[UserController::class, 'commentDelete'])->name('user#commentDelete');
+
+    Route::post('rating',[UserController::class, 'rating'])->name('user#rating');
+
+    Route::get('contact',[UserController::class, 'contactPage'])->name('user#contactPage');
+    Route::post('/contact/create',[UserController::class, 'contactCreate'])->name('user#contactCreate');
 
     Route::get('profile/edit', [ProfileController::class, 'editProfile'])->name('user#editProfile');
     Route::post('/profile/update',[ProfileController::class, 'updateProfile'])->name('user#updateProfile');
 
     Route::get('/change/password',[ProfileController::class, 'changePasswordPage'])->name('user#changePasswordPage');
     Route::post('change/password',[ProfileController::class, 'changePassword'])->name('user#changePassword');
+
+
 
 });

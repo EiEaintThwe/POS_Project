@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>Convenience Store Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -29,6 +29,9 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('user/css/bootstrap.min.css') }}" rel="stylesheet">
 
+    <!-- Custom css for rating -->
+    <link rel="stylesheet" href="{{ asset('user/css/custom.css') }}">
+
     <!-- Template Stylesheet -->
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
 
@@ -52,9 +55,9 @@
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="" class="nav-item nav-link ">Shop</a>
+                        <a href="{{ route('user#homepage') }}" class="nav-item nav-link ">Shop</a>
                         <a href="" class="nav-item nav-link">Cart</a>
-                        <a href="#" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('user#contactPage') }}" class="nav-item nav-link">Contact</a>
 
                     </div>
                     <div class="d-flex m-3 me-0">
@@ -219,6 +222,8 @@
 
     {{-- sweet alert cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @yield('js-script')
 
 
 

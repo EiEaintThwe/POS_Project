@@ -94,7 +94,7 @@
                                             <div class="col-4">
                                                 <div class="rounded position-relative fruite-item">
                                                     <div class="fruite-img">
-                                                        <a href=""><img
+                                                        <a href="{{ route('user#productDetails', $item->id) }}"><img
                                                                 src="{{ asset('productImage/' . $item->image) }}"
                                                                 style="height: 250px" class="img-fluid w-100 rounded-top"
                                                                 alt=""></a>

@@ -116,7 +116,7 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2|max:30',
-            'email' => 'required|unique:users,email,' . Auth::user()->id,
+            'email' => 'required',
             'phone' => 'required|max:20',
             'address' => 'max:200',
             'image' => 'file|mimes:jpg,jpeg,png,webp,svg,gif'
