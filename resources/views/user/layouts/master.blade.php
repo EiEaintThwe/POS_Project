@@ -56,13 +56,13 @@
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
                         <a href="{{ route('user#homepage') }}" class="nav-item nav-link ">Shop</a>
-                        <a href="" class="nav-item nav-link">Cart</a>
+                        <a href="{{ route('user#cart') }}" class="nav-item nav-link">Cart</a>
                         <a href="{{ route('user#contactPage') }}" class="nav-item nav-link">Contact</a>
 
                     </div>
                     <div class="d-flex m-3 me-0">
 
-                        <a href="" class="position-relative me-4 my-auto">
+                        <a href="{{ route('user#cart') }}" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                         </a>
                         <a href="" class="position-relative me-4 my-auto">
@@ -222,6 +222,8 @@
 
     {{-- sweet alert cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('user/js/main.js') }}"></script>
 
     @yield('js-script')
 

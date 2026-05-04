@@ -17,6 +17,9 @@ Route::group( [ 'prefix' => 'user', 'middleware' => 'userMiddleware' ] , functio
 
     Route::post('rating',[UserController::class, 'rating'])->name('user#rating');
 
+    Route::get('/cart',[UserController::class, 'cart'])->name('user#cart');
+    Route::post('/addToCart',[UserController::class, 'addToCart'])->name('user#addToCart');
+
     Route::get('contact',[UserController::class, 'contactPage'])->name('user#contactPage');
     Route::post('/contact/create',[UserController::class, 'contactCreate'])->name('user#contactCreate');
 

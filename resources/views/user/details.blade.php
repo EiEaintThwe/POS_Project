@@ -38,10 +38,11 @@
 
                             </div>
                             <p class="mb-4">{{ $product->description }}</p>
-                            <form action="" method="post">
+                            <form action="{{ route('user#addToCart') }}" method="post">
+                                @csrf
 
-                                <input type="hidden" name="userId" value="">
-                                <input type="hidden" name="productId" value="">
+                                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="productId" value="{{ $product->id }}">
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button type="button"
@@ -49,7 +50,7 @@
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" name="count"
+                                    <input type="text" name="qty"
                                         class="form-control form-control-sm text-center border-0" value="1">
                                     <div class="input-group-btn">
                                         <button type="button"

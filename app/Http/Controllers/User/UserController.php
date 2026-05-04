@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Contact;
@@ -102,6 +103,35 @@ class UserController extends Controller
         ]);
 
         Alert::success('Success Title', 'Rating Created Successfully');
+        return back();
+
+    }
+
+    //direct cart page
+    public function cart(){
+        $cart = Cart::select('carts.id as cart_id','carts.qty','products.id as product_id','products.name','products.price','products.image')
+                    ->leftJoin('products','carts.product_id','products.id')
+                    ->where('carts.user_id',Auth::user()->id)
+                    ->get();
+
+        $priceTotal = 0;
+
+        foreach($cart as $item){
+            $priceTotal += $item->price * $item->qty;
+        }
+
+        return view('user.cart',compact('cart','priceTotal'));
+    }
+
+    //add to cart
+    public function addToCart(Request $request){
+        Cart::create([
+            'user_id' => $request->userId,
+            'product_id' => $request->productId,
+            'qty' => $request->qty
+        ]);
+
+         Alert::success('Add to Cart Success!', 'Add to Cart Created Successfully');
         return back();
 
     }
