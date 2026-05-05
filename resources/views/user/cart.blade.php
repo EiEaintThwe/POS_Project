@@ -1,7 +1,7 @@
 @extends('user.layouts.master')
 
 @section('content')
-<!-- Cart Page Start -->
+    <!-- Cart Page Start -->
     <div class="container-fluid py-5 mt-5">
         <div class="container py-5">
             <div class="table-responsive">
@@ -19,48 +19,51 @@
                     <tbody>
 
                         @foreach ($cart as $item)
-                          <tr>
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('productImage/'.$item->image) }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"
-                                        alt="">
-                                </div>
-                            </th>
-                            <td>
-                                <p class="mb-0 mt-4">{{ $item->name }}</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4 price">{{ $item->price }} mmk</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset('productImage/' . $item->image) }}"
+                                            class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"
+                                            alt="">
                                     </div>
-                                    <input type="text" class="form-control qty form-control-sm text-center border-0"
-                                        value="{{ $item->qty }}">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                                </th>
+                                <td>
+                                    <p class="mb-0 mt-4">{{ $item->name }}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4 price">{{ $item->price }} mmk</p>
+                                </td>
+                                <td>
+                                    <div class="input-group quantity mt-4" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control qty form-control-sm text-center border-0"
+                                            value="{{ $item->qty }}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4 total">{{ $item->price * $item->qty }} mmk</p>
-                            </td>
-                            <td>
-                                <input type="hidden" class="cartId" value="">
-                                <input type="hidden" class="productId" value="">
-                                <button class="btn btn-md rounded-circle bg-light border mt-4 btn-remove">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4 total">{{ $item->price * $item->qty }} mmk</p>
+                                </td>
+                                <td>
+                                    <input type="hidden" class="cartId" value="{{ $item->cart_id }}">
+                                    <input type="hidden" class="userId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" class="productId" value="{{ $item->product_id }}">
 
-                        </tr>
 
+                                    <button class="btn btn-md rounded-circle bg-light border mt-4 btn-remove">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
                         @endforeach
 
 
@@ -91,55 +94,105 @@
                         </div>
                         <button id="btn-checkout"
                             class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                            type="button">Proceed Checkout</button>
+                            type="button" @if(count($cart) == 0 ) disabled @endif>Proceed Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Cart Page End -->
-
 @endsection
 
 
 @section('js-script')
+    <script>
+        $(document).ready(function() {
+            $('.btn-minus').click(function() {
+                countCalculation(this);
+                finalTotalCalculation();
 
-<script>
-    $(document).ready(function(){
-        $('.btn-minus').click(function(){
-            countCalculation(this);
-            finalTotalCalculation();
-
-
-        })
-
-        $('.btn-plus').click(function(){
-            countCalculation(this);
-            finalTotalCalculation();
-
-        })
-
-        function countCalculation(event){
-            parentNode = $(event).parents("tr");
-
-            price = parentNode.find(".price").text().replace("mmk","");
-            qty = parentNode.find(".qty").val();
-
-            parentNode.find(".total").text( price * qty + "mmk")
-        }
-
-        function finalTotalCalculation(){
-            total = 0;
-            $("#productTable tbody tr").each(function(index , item){
-                total += Number($(item).find(".total").text().replace("mmk",""));
 
             })
 
-            $("#subtotal").html(`${total} mmk`)
-            $("#finalTotal").html(`${total+5000} mmk`)
-        }
+            $('.btn-plus').click(function() {
+                countCalculation(this);
+                finalTotalCalculation();
 
-    })
-</script>
+            })
 
+            function countCalculation(event) {
+                parentNode = $(event).parents("tr");
+
+                price = parentNode.find(".price").text().replace("mmk", "");
+                qty = parentNode.find(".qty").val();
+
+                parentNode.find(".total").text(price * qty + "mmk")
+            }
+
+            function finalTotalCalculation() {
+                total = 0;
+                $("#productTable tbody tr").each(function(index, item) {
+                    total += Number($(item).find(".total").text().replace("mmk", ""));
+
+                })
+
+                $("#subtotal").html(`${total} mmk`)
+                $("#finalTotal").html(`${total+5000} mmk`)
+            }
+
+            $('.btn-remove').click(function() {
+                parentNode = $(this).parents("tr");
+
+                cartId = parentNode.find(".cartId").val();
+
+                deleteData = {
+                    'cartId': cartId
+                };
+
+                $.ajax({
+                    type: 'get',
+                    url: '/user/cartDelete',
+                    data: deleteData,
+                    dataType: 'json',
+                    success: function(res) {
+                        res.status == 'success' ? location.reload() : '';
+                    }
+
+                })
+
+            })
+        })
+        $('#btn-checkout').click(function() {
+            orderList = [];
+            userId = $(".userId").val();
+            orderCode = "POS-" + Math.floor(Math.random() * 10000000000);
+
+            $("#productTable tbody tr").each(function(index, row) {
+                productId = $(row).find(".productId").val();
+                qty = $(row).find(".qty").val();
+                finalTotal = $("#finalTotal").text().replace("mmk", "");
+
+                orderList.push({
+                        'product_id': productId,
+                        'user_id': userId,
+                        'count': qty,
+                        'status': 0,
+                        'order_code': orderCode,
+                        'totalAmt' : finalTotal
+                    });
+            })
+
+             $.ajax({
+                    type: 'get',
+                    url: '/user/tempStorage',
+                    data: Object.assign({},orderList),
+                    dataType: 'json',
+                    success: function(res) {
+                        res.status == 'success' ? location.href = '/user/paymentPage' : location.reload();
+                    }
+
+                })
+
+        })
+    </script>
 @endsection

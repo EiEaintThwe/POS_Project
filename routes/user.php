@@ -19,6 +19,13 @@ Route::group( [ 'prefix' => 'user', 'middleware' => 'userMiddleware' ] , functio
 
     Route::get('/cart',[UserController::class, 'cart'])->name('user#cart');
     Route::post('/addToCart',[UserController::class, 'addToCart'])->name('user#addToCart');
+    Route::get('cartDelete',[UserController::class, 'cartDelete'])->name('user#cartDelete');
+
+    Route::get('tempStorage',[UserController::class, 'tempStorage'])->name('user#tempStorage');
+
+    Route::get('paymentPage',[UserController::class, 'paymentPage'])->name('user#paymentPage');
+
+    Route::post('/order',[UserController::class, 'order'])->name('user#order');
 
     Route::get('contact',[UserController::class, 'contactPage'])->name('user#contactPage');
     Route::post('/contact/create',[UserController::class, 'contactCreate'])->name('user#contactCreate');
