@@ -12,10 +12,15 @@
     <title>POS Admin Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -43,25 +48,30 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin#dashboard') }}"><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
+                <a class="nav-link" href="{{ route('admin#dashboard') }}"><i
+                        class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('category#list') }}"><i class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
+                <a class="nav-link" href="{{ route('category#list') }}"><i
+                        class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('product#createPage') }}"><i class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
+                <a class="nav-link" href="{{ route('product#createPage') }}"><i
+                        class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('product#list') }}"><i class="fa-solid fa-layer-group"></i><span>Product List </span></a>
+                <a class="nav-link" href="{{ route('product#list') }}"><i
+                        class="fa-solid fa-layer-group"></i><span>Product List </span></a>
             </li>
 
-             @if (Auth::user()->role == 'superadmin')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('payment#list') }}"><i class="fa-solid fa-credit-card"></i></i><span>Payment Method </span></a>
-            </li>
+            @if (Auth::user()->role == 'superadmin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('payment#list') }}"><i
+                            class="fa-solid fa-credit-card"></i></i><span>Payment Method </span></a>
+                </li>
             @endif
 
             <li class="nav-item">
@@ -69,11 +79,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i><span>Order Board </span></a>
+                <a class="nav-link" href="{{ route('admin#orderList') }}"><i
+                        class="fa-solid fa-cart-shopping"></i><span>Order Board </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('profile#changePasswordPage') }}"><i class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
+                <a class="nav-link" href="{{ route('profile#changePasswordPage') }}"><i
+                        class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
             </li>
 
             <li class="nav-item">
@@ -111,7 +123,8 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {{ Auth::user()->name != null ? Auth::user()->name : Auth::user()->nickname }}
                                 </span>
-                                <img class="img-profile rounded-circle" src="{{ Auth::user()->profile == null ? asset('default/profilePicture.jpg') : asset('profile/' .Auth::user()->profile)}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ Auth::user()->profile == null ? asset('default/profilePicture.jpg') : asset('profile/' . Auth::user()->profile) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -124,18 +137,17 @@
                                 @if (Auth::user()->role == 'superadmin')
                                     <a class="dropdown-item" href="{{ route('account#createAdminPage') }}">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Add New Admin Account
+                                        Add New Admin Account
                                     </a>
                                     <a class="dropdown-item" href="{{ route('account#adminList') }}">
                                         <i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Admin List
+                                        Admin List
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('account#userList') }}">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            User List
+                                        User List
                                     </a>
-
                                 @endif
 
 
@@ -159,52 +171,55 @@
                 </nav>
                 <!-- End of Topbar -->
 
-               @yield('content')
+                @yield('content')
 
-               @include('sweetalert::alert')
+                @include('sweetalert::alert')
 
 
             </div>
         </div>
     </div>
 
-                <!-- Bootstrap core JavaScript-->
-                <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-                    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-                <!-- Core plugin JavaScript-->
-                <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
 
 
-                <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-                <!-- Page level custom scripts -->
-                <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
-                <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 
-                {{-- sweet alert cdn --}}
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                @yield('js-script')
+    <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
 
-                <script>
-                    function loadFile(event){
-                      var reader = new FileReader();
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
 
-                      reader.onload = function(){
-                        var output = document.getElementById('output');
-                        output.src = reader.result;
-                      }
+    {{-- sweet alert cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                      reader.readAsDataURL(event.target.files[0]);
-                    }
-                </script>
+    @yield('js-script')
+
+    <script>
+        function loadFile(event) {
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                var output = document.getElementById('output');
+                output.src = reader.result;
+            }
+
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 
 
 </body>

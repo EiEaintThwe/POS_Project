@@ -65,7 +65,7 @@
                         <a href="{{ route('user#cart') }}" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                         </a>
-                        <a href="" class="position-relative me-4 my-auto">
+                        <a href="{{ route('user#orderList') }}" class="position-relative me-4 my-auto">
                             <i class="fa-solid fa-list-check fa-2x"></i>
                         </a>
                         <div class="nav-item dropdown">

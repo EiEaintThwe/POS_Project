@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -57,6 +59,11 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'adminMiddleware'],function(
             Route::get('user/list', [AdminController::class, 'userList'])->name('account#userList');
             Route::get('user/delete/{id}', [AdminController::class, 'userDelete'])->name('account#userDelete');
         });
+    });
+
+    Route::group(['prefix' => 'order'], function(){
+        Route::get('list',[OrderController::class, 'orderList'])->name('admin#orderList');
+        Route::get('/details',[OrderController::class, 'orderDetails'])->name('admin#orderDetails');
     });
 
 

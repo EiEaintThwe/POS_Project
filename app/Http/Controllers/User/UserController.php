@@ -227,8 +227,18 @@ class UserController extends Controller
        }
 
         Alert::success('Thank for your order!', 'Order Created Successfully');
-        return back();
+        return to_route('user#orderList');
 
+    }
+
+    //direct to order list
+    public function orderList(){
+        $orderList = Order::selectRaw('DISTINCT ON (order_code) *')
+                ->where('user_id', Auth::user()->id)
+                ->orderBy('order_code')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        return view('user.orderList',compact('orderList'));
     }
 
 

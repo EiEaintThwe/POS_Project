@@ -26,6 +26,7 @@ Route::group( [ 'prefix' => 'user', 'middleware' => 'userMiddleware' ] , functio
     Route::get('paymentPage',[UserController::class, 'paymentPage'])->name('user#paymentPage');
 
     Route::post('/order',[UserController::class, 'order'])->name('user#order');
+    Route::get('/orderList',[UserController::class, 'orderList'])->name('user#orderList');
 
     Route::get('contact',[UserController::class, 'contactPage'])->name('user#contactPage');
     Route::post('/contact/create',[UserController::class, 'contactCreate'])->name('user#contactCreate');
