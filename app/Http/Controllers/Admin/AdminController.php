@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\PaymentHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -14,7 +16,11 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard.main');
+        $totalSaleAmt = PaymentHistory::sum('total_amt');
+        $orderCount = Order::whereIn('status',[0,1])->count('id');
+        $registerUser = User::where('role','user')->count('id');
+        $pendingOrder = Order::where('status',[0])->count('id');
+        return view('admin.dashboard.main',compact('totalSaleAmt','orderCount','registerUser','pendingOrder'));
     }
 
     //create new admin account

@@ -20,9 +20,12 @@
             <div class="col">
                 <div class="row">
                     <div class="col-6">
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <span><strong><i class="fa-solid fa-triangle-exclamation text-warning me-3"></i></strong>You can click order code to see order details....</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <span><strong><i class="fa-solid fa-triangle-exclamation text-warning mr-3"></i></strong>You can
+                                click order code to see order details....</span>
                         </div>
                     </div>
                 </div>
@@ -44,15 +47,19 @@
                             <tr>
 
                                 <td>{{ $item->created_at->format('j-F-Y') }}</td>
-                                <td><a href="{{ route('admin#orderDetails') }}">{{ $item->order_code }}</a></td>
+                                <td><a class="orderCode"
+                                        href="{{ route('admin#orderDetails', $item->order_code) }}">{{ $item->order_code }}</a>
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>
-                                    <select name="" id="" class=" form-select">
-                                        <option value="" @if ($item->status == 0) selected @endif>Pending
+                                    <select name="" id="" class=" form-select statusChange">
+                                        <option value="0" @if ($item->status == 0) selected @endif>Pending
                                         </option>
-                                        <option value="" @if ($item->status == 1) selected @endif>Success
-                                        </option>
-                                        <option value="" @if ($item->status == 2) selected @endif>Reject
+                                        @if ( $item->count <= $item->stock )
+                                              <option value="1" @if ($item->status == 1) selected @endif>Success
+                                              </option>
+                                        @endif
+                                        <option value="2" @if ($item->status == 2) selected @endif>Reject
                                         </option>
                                     </select>
                                 </td>
@@ -80,3 +87,30 @@
         </div>
     </div>
 @endsection
+
+@section('js-script')
+    <script>
+        $(document).ready(function() {
+            $('.statusChange').change(function() {
+               status = $(this).val();
+               orderCode = $(this).parents("tr").find('.orderCode').text();
+
+               data = {
+                'order_code' : orderCode,
+                'status' : status
+               };
+
+                $.ajax({
+                    type: 'get',
+                    url: '/admin/order/statusChange',
+                    data: data ,
+                    dataType: 'json',
+                    success: function(res) {
+                        res.status == 'success' ? location.reload() : '';
+                    }
+                })
+            })
+        })
+    </script>
+@endsection
+

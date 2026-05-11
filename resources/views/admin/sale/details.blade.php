@@ -5,7 +5,7 @@
     <div class="container-fluid">
 
 
-        <a href="{{ route('admin#orderList') }}" class=" text-black m-3"> <i class="fa-solid fa-arrow-left-long"></i> Back</a>
+        <a href="{{ route('admin#saleList') }}" class=" text-black m-3"> <i class="fa-solid fa-arrow-left-long"></i> Back</a>
 
         <!-- DataTales Example -->
 
@@ -18,27 +18,27 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-5">Name :</div>
-                        <div class="col-7"> {{ $order[0]->user_name }}</div>
+                        <div class="col-7"> {{ $sale[0]->user_name }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-5">Phone : </div>
                         <div class="col-7">
-                            {{ $order[0]->phone }}
+                            {{ $sale[0]->phone }}
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-5">Addr : </div>
                         <div class="col-7">
-                            {{ $order[0]->address == null ? '...' : $order[0]->address }}
+                            {{ $sale[0]->address == null ? '...' : $sale[0]->address }}
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-5">Order Code : </div>
-                        <div class="col-7" id="orderCode">{{ $order[0]->order_code }}</div>
+                        <div class="col-7" id="orderCode">{{ $sale[0]->order_code }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-5">Order Date :</div>
-                        <div class="col-7"> {{ $order[0]->created_at->format('j-F-Y') }}</div>
+                        <div class="col-7"> {{ $sale[0]->created_at->format('j-F-Y') }}</div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-5">Total Price :</div>
@@ -83,7 +83,7 @@
             <div class="card-header py-3 bg-primary">
                 <div class="d-flex justify-content-between">
                     <div class="">
-                        <h6 class="m-0 font-weight-bold text-white">Order Product Lists</h6>
+                        <h6 class="m-0 font-weight-bold text-white">Sale Product Lists</h6>
                     </div>
                 </div>
             </div>
@@ -94,28 +94,21 @@
                             <tr>
                                 <th class="col-2">Image</th>
                                 <th>Name</th>
-                                <th>Order Count</th>
-                                <th>Available Stock</th>
+                                <th>Count</th>
                                 <th>Product Price (each)</th>
                                 <th>Total Price</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($order as $item)
+                            @foreach ($sale as $item)
                                 <tr>
-                                    <input type="hidden" class="productId" value="{{ $item->product_id }}">
-                                    <input type="hidden" class="count" value="{{ $item->order_count }}">
 
                                     <td>
                                         <img src="{{ asset('productImage/' . $item->image) }}" class=" w-50 img-thumbnail">
                                     </td>
                                     <td>{{ $item->product_name }}</td>
-                                    <td>{{ $item->order_count }} @if ($item->order_count > $item->stock)
-                                            <small class=" text-danger">(out of stock)</small>
-                                        @endif
-                                    </td>
-                                    <td>{{ $item->stock }}</td>
+                                    <td>{{ $item->order_count }}  </td>
                                     <td>{{ $item->price }}mmk</td>
                                     <td>{{ $item->price * $item->order_count }} mmk</td>
                                 </tr>
@@ -129,12 +122,7 @@
             </div>
             <div class="card-footer d-flex justify-content-end">
                 <div class="">
-                    @if ($status)
-                        <input type="button" id="btn-order-confirm" class="btn btn-success rounded shadow-sm"
-                            value="Confirm">
-                    @endif
 
-                    <input type="button" id="btn-order-reject" class="btn btn-danger rounded shadow-sm" value="Reject">
                 </div>
             </div>
         </div>
@@ -143,73 +131,3 @@
     <!-- /.container-fluid -->
 @endsection
 
-@section('js-script')
-    <script>
-        $(document).ready(function() {
-               $('#btn-order-confirm').click(function(){
-
-        let orderCode = $('#orderCode').text().trim();
-
-        let orderList = [];
-
-        $('.data-table tbody tr').each(function(index,row){
-
-            let productId = $(row).find('.productId').val();
-            let count = $(row).find('.count').val();
-
-            orderList.push({
-                productId : productId,
-                count : count
-            });
-
-        });
-
-        $.ajax({
-
-            type : 'post',
-
-            url : '/admin/order/confirm',
-
-            data : {
-                _token : '{{ csrf_token() }}',
-                orderCode : orderCode,
-                orderList : orderList
-            },
-
-            dataType : 'json',
-
-            success : function(res){
-
-                if(res.status == 'success'){
-                    location.href = '/admin/order/list';
-                }
-
-            },
-
-            error : function(err){
-                console.log(err);
-            }
-
-        });
-
-    });
-
-
-            $('#btn-order-reject').click(function() {
-                orderCode = $('#orderCode').text();
-
-                $.ajax({
-                    type: 'get',
-                    url: '/admin/order/reject',
-                    data: {
-                        'orderCode': orderCode
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-                        res.status == 'success' ? location.href = '/admin/order/list' : '';
-                    }
-                })
-            })
-        })
-    </script>
-@endsection

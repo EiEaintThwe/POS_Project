@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -54,12 +54,12 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('category#list') }}"><i
-                        class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
+                        class="fa-solid fa-circle-plus"></i><span>Category </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('product#createPage') }}"><i
-                        class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
+                <a class="nav-link" href="{{ route('product#createPage') }}"><i class="fa-solid fa-plus"></i><span>Add
+                        Products </span></a>
             </li>
 
             <li class="nav-item">
@@ -70,12 +70,12 @@
             @if (Auth::user()->role == 'superadmin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('payment#list') }}"><i
-                            class="fa-solid fa-credit-card"></i></i><span>Payment Method </span></a>
+                            class="fa-solid fa-credit-card"></i><span>Payment Method </span></a>
                 </li>
             @endif
 
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-list"></i><span>Sale Information </span></a>
+                <a class="nav-link" href="{{ route('admin#saleList') }}"><i class="fa-solid fa-list"></i><span>Sale Information </span></a>
             </li>
 
             <li class="nav-item">
@@ -85,7 +85,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('profile#changePasswordPage') }}"><i
-                        class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
+                        class="fa-solid fa-lock"></i><span>Change Password </span></a>
             </li>
 
             <li class="nav-item">
@@ -152,7 +152,7 @@
 
 
                                 <a class="dropdown-item" href="{{ route('profile#changePasswordPage') }}">
-                                    <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i></i></i>
+                                    <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Change Password
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -182,13 +182,13 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
-
+    </script> --}}
+    <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -197,11 +197,14 @@
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 
 
-    <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     {{-- sweet alert cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

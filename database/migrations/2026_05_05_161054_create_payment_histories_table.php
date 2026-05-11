@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('payslip_image');
-            $table->string('payment_method');
+            $table->integer('payment_method');
             $table->string('order_code');
             $table->bigInteger('total_amt');
             $table->timestamps();

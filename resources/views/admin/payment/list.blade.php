@@ -19,19 +19,25 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Bank Account Number</label>
-                                    <input type="text" name="bankAccountNumber" value="" class=" form-control "
+                                    <input type="text" name="bankAccountNumber" value="" class=" form-control  @error('bankAccountNumber') is-invalid @enderror"
                                         placeholder="Enter Bank Account Number...">
+                                    @error('bankAccountNumber')
+                                        <small class=" invalid-feedback">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Bank Account Name</label>
-                                    <input type="text" name="bankAccountName" value="" class=" form-control "
+                                    <input type="text" name="bankAccountName" value="" class=" form-control  @error('bankAccountName') is-invalid @enderror"
                                         placeholder="Enter Bank Account Name...">
+                                    @error('bankAccountName')
+                                        <small class=" invalid-feedback">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Bank Account Type</label>
-                                    <select name="bankAccountType" id="" class="form-control">
+                                    <select name="bankAccountType" id="" class="form-control @error('bankAccountType') is-invalid @enderror">
                                         <option value="">Choose Bank Account Type</option>
                                         <option value="KBZ Pay">KBZ Pay</option>
                                         <option value="Wave Pay">Wave Pay</option>
@@ -41,8 +47,9 @@
                                         <option value="Bank Transfer">Bank Transfer</option>
                                         <option value="Mobile Banking">Mobile Banking</option>
                                     </select>
-
-
+                                    @error('bankAccountType')
+                                        <small class=" invalid-feedback">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <input type="submit" value="Create" class="btn btn-outline-primary mt-3">
